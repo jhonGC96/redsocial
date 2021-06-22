@@ -1,0 +1,29 @@
+<%- include ("cabeceras/cabecera.principal.ejs") %> 
+
+    <div class="container p-4">
+        <div class="row">
+            <!-- body -->
+            <div class="col-md-3">
+                <%- include ("partials/cardperfil.ejs") %>
+            </div>
+            <div class="col-md-6">
+                <%- include ("partials/bodyinicio.ejs") %>
+            </div>
+            <div class="col-md-3">
+
+                <div class="card mb-2 bg-dark text-white">
+                    <%- include ("partials/solicitudes.ejs") %>
+                </div>
+                <div class="card mb-2 bg-dark text-white">
+                    <%- include ("partials/popular.ejs") %>
+                </div>
+                <div class="card mt-2">
+                    <%- include ("partials/otro.ejs") %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FOOTER -->
+    <%- include ("footers/footer.ejs") %>
+</body>
+</html>

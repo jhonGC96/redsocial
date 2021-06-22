@@ -1,0 +1,117 @@
+<%- include ("cabeceras/cabecera.login.ejs") %>
+
+    <p></p>
+    <link href="https://fonts.googleapis.com/css?family=Raleway|Ubuntu" rel="stylesheet">
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/estilos.css">
+    <!-- Formularios -->
+    <div class="contenedor-formularios">
+        <!-- Links de los formularios -->
+        <ul class="contenedor-tabs">
+            <li class="tab tab-segunda active"><a href="#iniciar-sesion">Iniciar Sesión</a></li>
+            <li class="tab tab-primera"><a href="#registrarse">Registrarse</a></li>
+        </ul>
+
+        <!-- Contenido de los Formularios -->
+        <div class="contenido-tab">
+            <!-- Iniciar Sesion -->
+            <div id="iniciar-sesion">
+                <h1>Iniciar Sesión</h1>
+                <form id="loginForm" method="post">
+                    <div class="contenedor-input">
+                        <label>
+                            Email <span class="req">*</span>
+                        </label>
+                        <input id="email" name="email" type="text" required>
+                    </div>
+
+                    <div class="contenedor-input">
+                        <label>
+                            Contraseña <span class="req">*</span>
+                        </label>
+                        <input id="pass" name="pass" type="password" required>
+                    </div>
+                    <p class="forgot"><a href="#">Se te olvidó la contraseña?</a></p>
+                    <button type="submit" class="button button-block" tabindex="3">
+                        login
+                    </button>
+                </form>
+            </div>
+
+            <!-- Registrarse -->
+            <div id="registrarse">
+                <h1>Registrarse</h1>
+                <form action="/saveuser" id="formRegistrar" method="post">
+                    <div class="fila-arriba">
+                        <div class="contenedor-input">
+                            <label>
+                                Nombre <span class="req">*</span>
+                            </label>
+                            <input type="text" name='nombre' required>
+                        </div>
+
+                        <div class="contenedor-input">
+                            <label>
+                                Apellido <span class="req">*</span>
+                            </label>
+                            <input type="text" name='apellido' required>
+                        </div>
+                    </div>
+                    <div class="contenedor-input">
+                        <label>
+                            Email <span class="req">*</span>
+                        </label>
+                        <input type="email" name='email' required>
+                    </div>
+                    <div class="contenedor-input">
+                        <label>
+                            Edad <span class="req">*</span>
+                        </label>
+                        <input type="number" name='edad' required>
+                    </div>
+                    <div class="contenedor-input">
+                        <label>
+                            Contraseña <span class="req">*</span>
+                        </label>
+                        <input type="password" name='pass' required>
+                    </div>
+
+                    <div class="contenedor-input">
+                        <label>
+                            Repetir Contraseña <span class="req">*</span>
+                        </label>
+                        <input type="password" name='repeat_password' required>
+                    </div>
+
+                    <div class="contenedor-input">
+                        <label>
+                            Pais <span class="req">*</span>
+                        </label>
+                        <input list='paises' name='pais' required>
+                        <datalist id="paises">
+                            <option value=1>Mexico</option>
+                            <option value=2>Argentina</option>
+                            <option value=3>Estados unidos</option>
+                        </datalist>
+                    </div>
+
+                    <div class="contenedor-input">
+                        <label>
+                            Perfil linkedin
+                        </label>
+                        <input type="text" name='perfillinkedin'>
+                    </div>
+
+                    <input type="submit" class="button button-block" value="Registrarse">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/loginestilo.js"></script>
+    </body>
+
+    </html>

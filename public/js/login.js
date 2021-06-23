@@ -10,9 +10,12 @@ class Usuarios {
             this.nombre = "",
             this.apellido = "",
             this.edad = "",
+            this.tipousr = "",
             this.pais = "",
-            this.linkedin = ""
-    } 
+            this.linkedin = "",
+            this.hobbies = "",
+            this.token = ""
+    }
 
     static async guardaUsuario(usuario) {
         localStorage.setItem("dataUsuario", JSON.stringify(usuario))
@@ -25,7 +28,7 @@ class Usuarios {
 }
 
 //Manda el post
-form.addEventListener('submit', async (event) => {
+form.addEventListener('submit', async(event) => {
     event.preventDefault();
     Usuarios.guardaUsuario(new Usuarios(email.value, pass.value));
     let resultado = await fetch("http://localhost:3000/login", {
@@ -53,9 +56,11 @@ form.addEventListener('submit', async (event) => {
         data.nombre = vuelta.username_usuario.nombre_usr;
         data.apellido = vuelta.username_usuario.apellido_usr;
         data.edad = vuelta.username_usuario.edad_usr;
-        data.pais = vuelta.id_pais1;
-        data.linkedin = vuelta.perfillinkedin
-        data.token = vuelta.token
+        data.pais = vuelta.username_usuario.id_pais1;
+        data.tipousr = vuelta.username_usuario.id_tipousr1;
+        data.linkedin = vuelta.username_usuario.perfillinkedin;
+        data.hobbies = vuelta.username_usuario.hobbies;
+        data.token = vuelta.token;
         Usuarios.guardaUsuario(data);
 
         if (data.token === undefined) {

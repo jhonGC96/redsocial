@@ -5,7 +5,7 @@ const verificacion = require('../controlador/controlador')
 //Exportación de módulos
 module.exports = (app) => {
 
-    app.get('/listarusuarios', async (req, res) => {
+    app.get('/listarusuarios', async(req, res) => {
         //Control de errores
         try {
             let resultado = await controladorUsuario.listarUsuarios()
@@ -18,7 +18,7 @@ module.exports = (app) => {
     })
 
     //rutas para crear usuario y guardarlo
-    app.get('/createuser', async (req, res) => {
+    app.get('/createuser', async(req, res) => {
         try {
             await res.render('crearusuarios')
 
@@ -27,29 +27,29 @@ module.exports = (app) => {
             res.estatus(400).json('Error al dirigirse a la pagina CREAR')
         }
     })
- 
+
     //Método POST para guardar usuario
-    app.post('/saveuser', verificacion.checkUser, async (req, res) => {
+    app.post('/saveuser', async(req, res) => {
         let alta = req.body
-        //console.log(alta);
+            //console.log(alta);
         try {
             let resultado = await controladorUsuario.chequearUsuario(alta)
             if (resultado) {
                 res.json('error ya esta registrado')
             } else {
                 await controladorUsuario.altaUsuarios(alta)
-                res.redirect('/main')
+                res.redirect('/login')
             }
         } catch (e) {
             console.log(e);
         }
     })
- 
+
     //Método get para acutlizar el usuario dado por un ID
-    app.get('/updateUsuario/:id_usuario', async (req, res) => {
+    app.get('/updateUsuario/:id_usuario', async(req, res) => {
         //Creacion de objeto
         let update = req.params.id_usuario
-        //Control de errores
+            //Control de errores
         try {
             let resultado = await controladorUsuario.updateUsuario(update)
             res.render('editarusuario', {
@@ -60,7 +60,7 @@ module.exports = (app) => {
         }
     })
 
-    app.post('/updateUsuario/:id_usuario', async (req, res) => {
+    app.post('/updateUsuario/:id_usuario', async(req, res) => {
         let id = req.params.id_usuario
         let update = req.body
         try {
@@ -72,10 +72,10 @@ module.exports = (app) => {
     })
 
     //Metodo get para dar de baja usuario dado por un ID
-    app.get('/bajaUsuario/:id_usuario', async (req, res) => {
+    app.get('/bajaUsuario/:id_usuario', async(req, res) => {
         //Creacion de objeto
         const baja = req.params.id_usuario
-        //Control de errores
+            //Control de errores
         try {
 
             //Uso de objetos

@@ -3,18 +3,18 @@ const controladorUsuario = require('../controlador/controlador.usuarios')
 
 //Exportar nuestros endpoint
 
-module.exports = async (app) => {
+module.exports = async(app) => {
 
-    app.get('/hi', controladorLogin.verificacion, async (req, res) => {
+    app.get('/hi', controladorLogin.verificacion, async(req, res) => {
         res.json('ok')
     })
 
-    app.get('/userown/:id', async (req, res) => {
+    app.get('/userown/:id', async(req, res) => {
         let usr = req.params.id
         try {
             let resultado = await controladorUsuario.listarUsuarios(usr)
             res.render("main", {
-                data: resultado 
+                data: resultado
             })
         } catch (error) {
             console.log(err)
@@ -22,11 +22,11 @@ module.exports = async (app) => {
         }
     })
 
-    app.get('/uservisit/:id', async (req, res) => {
+    app.get('/uservisit/:id', async(req, res) => {
         let usr = req.params.id
         try {
             let resultado = await controladorUsuario.listarUsuarios(usr)
-            //console.log(resultado);
+                //console.log(resultado);
             res.render("main", {
                 data: resultado
             })
@@ -37,7 +37,7 @@ module.exports = async (app) => {
     })
 
 
-    app.get('/login', async (req, res) => {
+    app.get('/login', async(req, res) => {
         try {
             res.render("login")
         } catch (error) {
@@ -47,8 +47,9 @@ module.exports = async (app) => {
     })
 
 
-    app.post('/login', async (req, res) => {
+    app.post('/login', async(req, res) => {
         let usuario = req.body
+            //console.log(usuario);
         try {
             let resultado = await controladorLogin.chequearUsuario(usuario)
             if (resultado) {

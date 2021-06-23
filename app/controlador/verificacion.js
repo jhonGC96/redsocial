@@ -13,7 +13,9 @@ module.exports = {
         pass: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
         repeat_password: Joi.ref('pass'),
         pais: Joi.number().integer().min(1).max(3).required(),
+        tipousr: Joi.number().integer().min(1).max(2).required(),
         perfillinkedin: Joi.string().empty(''),
+        hobbies: Joi.string().empty(''),
     }).with('username_usuario', 'pass_usuario'),
     //Uso de objetos
     Producto: Joi.object().keys({
@@ -23,4 +25,3 @@ module.exports = {
         cantidad_inventario_prod: Joi.number(),
     }),
 }
-

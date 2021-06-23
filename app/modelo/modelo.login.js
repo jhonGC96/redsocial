@@ -12,8 +12,7 @@ module.exports = class Datos {
         ]
 
         try {
-            let resultado = await sequelize.query(`SELECT * FROM Usuario WHERE email_usr = ? AND contrasena = ?`,
-                { replacements: usuarioUpdate, type: sequelize.QueryTypes.SELECT })
+            let resultado = await sequelize.query(`SELECT * FROM Usuario WHERE email_usr = ? AND contrasena = ?`, { replacements: usuarioUpdate, type: sequelize.QueryTypes.SELECT })
             if (resultado[0] === undefined) {
                 return false
             } else {
@@ -31,12 +30,11 @@ module.exports = class Datos {
         ]
 
         try {
-            let resultado = await sequelize.query(`SELECT * FROM Usuario WHERE email_usr = ? AND contrasena = ?`,
-                { replacements: usuarioUpdate, type: sequelize.QueryTypes.SELECT })
+            let resultado = await sequelize.query(`SELECT * FROM Usuario WHERE email_usr = ? AND contrasena = ?`, { replacements: usuarioUpdate, type: sequelize.QueryTypes.SELECT })
             if (resultado[0] === undefined) {
                 return false
             } else {
-                return resultado [0]
+                return resultado[0]
             }
         } catch (error) {
             throw new Error('Ocurrio un error')

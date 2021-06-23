@@ -1,8 +1,9 @@
 const login = require('../modelo/modelo.login')
 const jwt = require('jsonwebtoken')
 
-module.exports.verificacion = async (req, res, next) => {
+module.exports.verificacion = async(req, res, next) => {
     let token = req.headers['authorization']
+    console.log(token);
     if (token != undefined) {
         let tokenchk = token.split(' ')[1]
         let resultado = jwt.verify(tokenchk, process.env.SECRET_KEY)
@@ -15,8 +16,8 @@ module.exports.verificacion = async (req, res, next) => {
         res.status(400).json('Este sistema es privado y seguro, necesita un Token para ingresar')
     }
 }
- 
-module.exports.chequearUsuario = async (usr) => {
+
+module.exports.chequearUsuario = async(usr) => {
     let usrchk = usr
     try {
         let resultado = await login.existenciaDeUsuario(usrchk)
@@ -32,14 +33,13 @@ module.exports.chequearUsuario = async (usr) => {
 }
 
 
-module.exports.generaToken = async (data) => {
+module.exports.generaToken = async(data) => {
     try {
         let resultado = jwt.sign({
             data
         }, process.env.SECRET_KEY, {
             expiresIn: '1d'
-        }
-        )
+        })
         return resultado
     } catch (err) {
         console.log(err)
@@ -47,17 +47,17 @@ module.exports.generaToken = async (data) => {
     }
 }
 
-module.exports.datosUsuario = async (usr) => {
+module.exports.datosUsuario = async(usr) => {
     let usrchk = usr
     try {
-        let resultado =  await login.recuperarInfoUser(usrchk)
+        let resultado = await login.recuperarInfoUser(usrchk)
         if (resultado) {
             return resultado
-        }else {
-            throw new Error ('No hay datos de Usuario')
+        } else {
+            throw new Error('No hay datos de Usuario')
         }
-    }catch (err){
+    } catch (err) {
         console.log(err)
-        throw new Error (' no semuy bien que paso')
+        throw new Error(' no semuy bien que paso')
     }
 }

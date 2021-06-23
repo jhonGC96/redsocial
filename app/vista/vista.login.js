@@ -26,7 +26,6 @@ module.exports = async(app) => {
         let usr = req.params.id
         try {
             let resultado = await controladorUsuario.listarUsuarios(usr)
-                //console.log(resultado);
             res.render("main", {
                 data: resultado
             })
@@ -49,7 +48,6 @@ module.exports = async(app) => {
 
     app.post('/login', async(req, res) => {
         let usuario = req.body
-            //console.log(usuario);
         try {
             let resultado = await controladorLogin.chequearUsuario(usuario)
             if (resultado) {

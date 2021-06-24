@@ -38,14 +38,14 @@ module.exports = (app) => {
                 res.json('error ya esta registrado')
             } else {
                 await controladorUsuario.altaUsuarios(alta)
-                res.redirect('/login')
+                res.redirect('/userown/:id/tecnologias')
             }
         } catch (e) {
             console.log(e);
         }
     })
 
-    //Método get para acutlizar el usuario dado por un ID
+    /*Método get para acutlizar el usuario dado por un ID
     app.get('/updateUsuario/:id_usuario', async(req, res) => {
         //Creacion de objeto
         let update = req.params.id_usuario
@@ -69,7 +69,7 @@ module.exports = (app) => {
         } catch (e) {
             console.log(e);
         }
-    })
+    })*/
 
     //Metodo get para dar de baja usuario dado por un ID
     app.get('/bajaUsuario/:id_usuario', async(req, res) => {

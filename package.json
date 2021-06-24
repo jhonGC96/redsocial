@@ -22,6 +22,7 @@
     "nodemon": "^2.0.7",
     "rate-limit": "^0.1.1",
     "sequelize": "^6.6.2",
+    "sweetalert": "^2.1.2",
     "tedious": "^11.0.8"
   }
 }

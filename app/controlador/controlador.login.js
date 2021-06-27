@@ -27,7 +27,7 @@ module.exports.chequearUsuario = async(usr) => {
             throw new Error('Contrasena incorrecta')
         }
     } catch (err) {
-        throw new Error('No existe el usuario')
+        throw new Error('email o contrase;a incorrectos')
     }
 }
 

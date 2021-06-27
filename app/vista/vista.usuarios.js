@@ -1,6 +1,6 @@
 //Importación de modulos dados por el controlador
 const controladorUsuario = require('../controlador/controlador.usuarios')
-const verificacion = require('../controlador/controlador')
+const validar = require('../controlador/controlador.validacion')
 
 //Exportación de módulos
 module.exports = (app) => {
@@ -48,16 +48,16 @@ module.exports = (app) => {
     //esta ruta muestra el formulario para registrarse
 
     //esta ruta guarda usuario
-    app.post('/saveuser', async(req, res) => {
+    app.post('/saveuser', validar.checkUser, async(req, res) => {
         let alta = req.body
-            //console.log(alta);
+        console.log(alta);
         try {
             let resultado = await controladorUsuario.chequearUsuario(alta)
             if (resultado) {
                 throw new Error('El usuario ya esta registrado')
             } else {
                 await controladorUsuario.altaUsuarios(alta)
-                res.redirect('/userown/:id/tecnologias')
+                res.json('ok')
             }
         } catch (err) {
             res.status(400).json({ error: err.message })

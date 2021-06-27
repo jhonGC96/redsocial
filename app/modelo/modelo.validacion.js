@@ -5,7 +5,7 @@ const Joi = require('joi')
 
 module.exports = {
     //validacion de registro de usuario
-    Login: Joi.object().keys({
+    Registro: Joi.object().keys({
         nombre: Joi.string().min(3).max(30).required(),
         apellido: Joi.string().min(3).max(40).required(),
         email: Joi.string().email().required(),
@@ -19,9 +19,9 @@ module.exports = {
     }).with('username_usuario', 'pass_usuario'),
 
     //validacion de registro de tecnologias
-    Tecnologia: Joi.object().keys({
-        id_tecnologia: Joi.number().integer().min(1).max(6).required(),
-        tecnologia: Joi.string().required(),
+    Perfil: Joi.object().keys({
+        id: Joi.number().integer().min(1).max(6).required(),
+        nombre: Joi.string().required(),
         beforetecla: Joi.number().integer().min(1).max(10).required(),
         aftertecla: Joi.number().integer().min(1).max(10).required(),
         puntaje: Joi.number().integer().min(1).max(5)

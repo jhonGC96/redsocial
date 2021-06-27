@@ -23,14 +23,14 @@
                         <label>
                             Email <span class="req">*</span>
                         </label>
-                        <input id="email" name="email" type="text" required>
+                        <input id="email" type="text" required>
                     </div>
 
                     <div class="contenedor-input">
                         <label>
                             Contraseña <span class="req">*</span>
                         </label>
-                        <input id="pass" name="pass" type="password" required>
+                        <input id="pass" type="password" required>
                     </div>
                     <p class="forgot"><a href="#">Se te olvidó la contraseña?</a></p>
                     <button type="submit" class="button button-block" tabindex="3">
@@ -42,18 +42,18 @@
             <!-- Registrarse -->
             <div id="registrarse">
                 <h1>Registrarse</h1>
-                <form action="/saveuser" id="formRegistrar" method="post">
+                <form id="formRegistrar" method="post">
                     <div class="fila-arriba">
                         <div class="contenedor-input">
                             <label>
-                                Nombre <span class="req">*</span>
+                                Nombres <span class="req">*</span>
                             </label>
                             <input type="text" id='nombre' required>
                         </div>
 
                         <div class="contenedor-input">
                             <label>
-                                Apellido <span class="req">*</span>
+                                Apellidos <span class="req">*</span>
                             </label>
                             <input type="text" id='apellido' required>
                         </div>
@@ -62,7 +62,7 @@
                         <label>
                             Email <span class="req">*</span>
                         </label>
-                        <input type="email" id='email' required>
+                        <input type="email" id='correo' required>
                     </div>
                     <div class="contenedor-input">
                         <label>
@@ -74,7 +74,7 @@
                         <label>
                             Contraseña <span class="req">*</span>
                         </label>
-                        <input type="password" id='pass' required>
+                        <input type="password" id='password' required>
                     </div>
                     <div class="contenedor-input">
                         <label>
@@ -86,7 +86,7 @@
                         <label>
                             Pais <span class="req">*</span>
                         </label>
-                        <input list='paises' id='pais' min="1" max="3" required>
+                        <input list='paises' id='pais' name="paises" min="1" max="3" required>
                         <datalist id="paises">
                             <option value=1>Mexico</option>
                             <option value=2>Argentina</option>
@@ -97,7 +97,7 @@
                         <label>
                             Tipo usuario <span class="req">*</span>
                         </label>
-                        <input list='tipousr' id='tipouser' min="1" max="2" required>
+                        <input list='tipousr' id='tipouser' name='tipousr' min="1" max="2" required>
                         <datalist id="tipousr">
                             <option value=1>Tecler</option>
                             <option value=2>Tecler mentor</option>
@@ -107,10 +107,10 @@
                         <label>
                             Perfil linkedin
                         </label>
-                        <input type="text" name='perfillinkedin'>
+                        <input type="text" id='perfillinkedin'>
                     </div>
                     <div class="contenedor-input">
-                        <textarea class="form-control" id="hobbies" rows="3" placeholder="Tus hobbies o aficiones, sobre ti" maxlength="300"></textarea>
+                        <textarea class="form-control" id="hobbies" rows="3" placeholder="Tus hobbies o aficiones" maxlength="300"></textarea>
                     </div>
                     <input type="submit" class="button button-block" value="Registrarse">
                 </form>
@@ -120,6 +120,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="js/login.js"></script>
     <script src="js/loginestilo.js"></script>
+    <script src="js/crearusuario.js"></script>
     </body>
 
     </html>

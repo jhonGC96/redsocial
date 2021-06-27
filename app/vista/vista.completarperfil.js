@@ -1,5 +1,7 @@
 const controladorLogin = require('../controlador/controlador.login')
+const validacion = require('../modelo/modelo.validacion')
 const miperfil = require('../controlador/controlador.completarperfil')
+const validar = require('../controlador/controlador.validacion')
 
 
 //Exportar nuestros endpoint     //Rutas para completar perfil//
@@ -21,7 +23,7 @@ module.exports = async(app) => {
     app.post('/userown/:id/upload-foto', controladorLogin.verificacion, async(req, res) => {
         let data = req.body
         try {
-            await controladorUsuario.altaUsuarios(alta)
+            await controladorUsuario.altaUsuarios(data)
             res.redirect('/userown/:id/tecnologias')
         } catch (error) {
 

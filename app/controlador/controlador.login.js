@@ -21,13 +21,13 @@ module.exports.chequearUsuario = async(usr) => {
     try {
         let resultado = await login.existenciaDeUsuario(usrchk)
         if (resultado) {
-            return resultado
+            let res = await login.autenticarPass(usrchk)
+            return res
         } else {
-            throw new Error('No existe el usuario')
+            throw new Error('Contrasena incorrecta')
         }
     } catch (err) {
-        console.log(err)
-        throw new Error('no semuy bien que paso')
+        throw new Error('No existe el usuario')
     }
 }
 

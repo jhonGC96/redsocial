@@ -1,11 +1,13 @@
-let table = document.getElementById('tablaTecnologia')
-class TecnologiaUsuario {
-    constructor(id_tecno, tecnologia, beforetecla, aftertecla) {
-        this.id_tecno = id_tecno,
-            this.tecnologia = tecnologia,
+let table = document.getElementById('tablaAlta')
+
+class PerfilUsuario {
+    constructor(id, nombre, beforetecla, aftertecla) {
+        this.id = id,
+            this.nombre = nombre,
             this.beforetecla = beforetecla,
             this.aftertecla = aftertecla
     }
+
     static async recuperaUsuario() {
         let resultado = await JSON.parse(localStorage.getItem('dataUsuario'))
         return resultado
@@ -34,32 +36,26 @@ table.addEventListener('submit', async(event) => {
     let row18 = document.getElementById('row18').value
     let row19 = document.getElementById('row19').value
     let row20 = document.getElementById('row20').value
-    let row21 = document.getElementById('row21').value
-    let row22 = document.getElementById('row22').value
-    let row23 = document.getElementById('row23').value
-    let row24 = document.getElementById('row24').value
-    let usuario = await TecnologiaUsuario.recuperaUsuario();
-    let node = new TecnologiaUsuario(row1, row2, row3, row4);
-    let frontend = new TecnologiaUsuario(row5, row6, row7, row8)
-    let swaggerr = new TecnologiaUsuario(row9, row10, row11, row12)
-    let javas = new TecnologiaUsuario(row13, row14, row15, row16)
-    let jasonwebtoken = new TecnologiaUsuario(row17, row18, row19, row20)
-    let modelovistacontrolador = new TecnologiaUsuario(row21, row22, row23, row24)
-    let tecnologiauser = [
-        node,
-        frontend,
-        swaggerr,
-        javas,
-        jasonwebtoken,
-        modelovistacontrolador
+    let usuario = await PerfilUsuario.recuperaUsuario();
+    let dato1 = new PerfilUsuario(row1, row2, row3, row4);
+    let dato2 = new PerfilUsuario(row5, row6, row7, row8)
+    let dato3 = new PerfilUsuario(row9, row10, row11, row12)
+    let dato4 = new PerfilUsuario(row13, row14, row15, row16)
+    let dato5 = new PerfilUsuario(row17, row18, row19, row20)
+    let altauser = [
+        dato1,
+        dato2,
+        dato3,
+        dato4,
+        dato5,
     ]
-    console.log(tecnologiauser);
     if (usuario.token === undefined) {
         console.log('no puedes acceder porque no tienes un token');
     } else {
-        tecnologiauser.forEach(async(tecnologia) => {
 
-            let resultado = await fetch("http://localhost:3000/userown/" + usuario.id + "/tecnologias", {
+        altauser.forEach(async(tecnologia) => {
+
+            await fetch("http://localhost:3000/userown/" + usuario.id + "/conocimientos", {
                 method: 'POST',
                 headers: {
                     "Accept": "application/json, text/plain, *,*",
@@ -71,4 +67,5 @@ table.addEventListener('submit', async(event) => {
         })
         location.href = '/userown/' + usuario.id
     }
+
 })

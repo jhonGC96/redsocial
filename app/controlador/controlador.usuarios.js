@@ -2,9 +2,9 @@
 const usuarios = require('../modelo/modelo.usuario')
 
 //Funcion para listar usuarios
-module.exports.listarUsuarios = async (usr) => {
+module.exports.listarUsuarios = async(usr) => {
     let data = usr
-    try { 
+    try {
         //Uso de objetos
         let resultado = await usuarios.listar(data)
         return resultado
@@ -15,7 +15,7 @@ module.exports.listarUsuarios = async (usr) => {
 }
 
 //Función para alta de usuarios
-module.exports.altaUsuarios = async (data) => {
+module.exports.altaUsuarios = async(data) => {
     //Control de errores
     try {
         //Uso de objetos
@@ -28,7 +28,7 @@ module.exports.altaUsuarios = async (data) => {
 }
 
 //Función para actualizar usuarios
-module.exports.updateUsuario = async (data) => {
+module.exports.updateUsuario = async(data) => {
     try {
         //Uso de objetos
         let resultado = await usuarios.modificar(data)
@@ -38,7 +38,7 @@ module.exports.updateUsuario = async (data) => {
     }
 }
 
-module.exports.saveUpdateUsuario = async (data, id) => {
+module.exports.saveUpdateUsuario = async(data, id) => {
     try {
         await usuarios.modificarSave(data, id)
         return 'se actualizo correcto'
@@ -48,7 +48,7 @@ module.exports.saveUpdateUsuario = async (data, id) => {
 }
 
 //Función para dar de baja un usuario
-module.exports.bajaUsuario = async (data) => {
+module.exports.bajaUsuario = async(data) => {
     //Control de errores
     try {
         //Uso de objetos
@@ -61,18 +61,16 @@ module.exports.bajaUsuario = async (data) => {
 }
 
 //funcion para checar que usuario no exista al dar de alta
-module.exports.chequearUsuario = async (usr) => {
-    let usrchk = usr 
+module.exports.chequearUsuario = async(usr) => {
+    let usrchk = usr
     try {
         let resultado = await usuarios.existenciaDeUsuario(usrchk)
-        console.log(resultado);
         if (resultado) {
-            return true 
+            throw new Error('error ya existe el usuario registrado')
         } else {
             return resultado
         }
     } catch (err) {
-        console.log(err)
-        throw new Error('no semuy bien que paso')
+        throw new Error(err)
     }
 }

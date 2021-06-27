@@ -5,6 +5,34 @@ const verificacion = require('../controlador/controlador')
 //Exportación de módulos
 module.exports = (app) => {
 
+    //rutas para mostrar la plantilla de usuario
+    app.get('/userown/:id', async(req, res) => {
+        let usr = req.params.id
+        try {
+            let resultado = await controladorUsuario.listarUsuarios(usr)
+            res.render("main", {
+                data: resultado
+            })
+        } catch (error) {
+            console.log(err)
+            res.estatus(400).json('No se pudo abrir la pagina')
+        }
+    })
+
+    app.get('/uservisit/:id', async(req, res) => {
+        let usr = req.params.id
+        try {
+            let resultado = await controladorUsuario.listarUsuarios(usr)
+                //console.log(resultado);
+            res.render("", {
+                data: resultado
+            })
+        } catch (error) {
+            console.log(err)
+            res.estatus(400).json('No se pudo abrir la pagina')
+        }
+    })
+
     app.get('/listarusuarios', async(req, res) => {
         //Control de errores
         try {
@@ -17,31 +45,22 @@ module.exports = (app) => {
         }
     })
 
-    //rutas para crear usuario y guardarlo
-    app.get('/createuser', async(req, res) => {
-        try {
-            await res.render('crearusuarios')
+    //esta ruta muestra el formulario para registrarse
 
-        } catch (err) {
-            console.log(err)
-            res.estatus(400).json('Error al dirigirse a la pagina CREAR')
-        }
-    })
-
-    //Método POST para guardar usuario
+    //esta ruta guarda usuario
     app.post('/saveuser', async(req, res) => {
         let alta = req.body
             //console.log(alta);
         try {
             let resultado = await controladorUsuario.chequearUsuario(alta)
             if (resultado) {
-                res.json('error ya esta registrado')
+                throw new Error('El usuario ya esta registrado')
             } else {
                 await controladorUsuario.altaUsuarios(alta)
                 res.redirect('/userown/:id/tecnologias')
             }
-        } catch (e) {
-            console.log(e);
+        } catch (err) {
+            res.status(400).json({ error: err.message })
         }
     })
 

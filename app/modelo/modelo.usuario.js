@@ -86,20 +86,21 @@ module.exports = class Datos {
         }
     }
 
-    static async modificarSave(data, id) {
-        let usuarioUpdate = [
-            data.nombres_usuario,
-            data.apellidos_usuario,
-            data.email_usuario,
-            data.username_usuario,
-            data.id_tipousr,
-            id
-        ]
-        try {
-            let resultado = await sequelize.query(`UPDATE usuarios SET nombres_usuario= ?, apellidos_usuario= ?, email_usuario= ?, username_usuario= ?, id_tipousr= ? WHERE id_usuario= ? `, { replacements: usuarioUpdate, type: sequelize.QueryTypes.SELECT })
-            return resultado;
-        } catch (error) {}
-    }
+
+    // static async modificarSave(data, id) {
+    //     let usuarioUpdate = [
+    //         data.nombres_usuario,
+    //         data.apellidos_usuario,
+    //         data.email_usuario,
+    //         data.username_usuario,
+    //         data.id_tipousr,
+    //         id
+    //     ]
+    //     try {
+    //         let resultado = await sequelize.query(`UPDATE usuarios SET nombres_usuario= ?, apellidos_usuario= ?, email_usuario= ?, username_usuario= ?, id_tipousr= ? WHERE id_usuario= ? `, { replacements: usuarioUpdate, type: sequelize.QueryTypes.SELECT })
+    //         return resultado;
+    //     } catch (error) {}
+    // }
 
     static async existenciaDeUsuario(data) {
         let usuarioUpdate = [
@@ -113,7 +114,24 @@ module.exports = class Datos {
                 return true
             }
         } catch (error) {
-            throw new Error('Ocurrio un error')
+            throw new Error('Ocurrio un error al hacer la peticion a la BD')
+        }
+    }
+
+    static async autenticarPass(data) {
+        let usuarioUpdate = [
+            data.email,
+            data.pass
+        ]
+        try {
+            let resultado = await sequelize.query(`SELECT * FROM Usuario WHERE email_usr =? AND contrasena =?`, { replacements: usuarioUpdate, type: sequelize.QueryTypes.SELECT })
+            if (resultado[0] === undefined) {
+                return false
+            } else {
+                return true
+            }
+        } catch (error) {
+            throw new Error('Ocurrio un error al hacer la peticion a la BD')
         }
     }
 

@@ -8,18 +8,12 @@ module.exports = class Datos {
     static async existenciaDeUsuario(data) {
         let usuarioUpdate = [
             data.email,
-            data.pass
         ]
-
-        try {
-            let resultado = await sequelize.query(`SELECT * FROM Usuario WHERE email_usr = ? AND contrasena = ?`, { replacements: usuarioUpdate, type: sequelize.QueryTypes.SELECT })
-            if (resultado[0] === undefined) {
-                return false
-            } else {
-                return true
-            }
-        } catch (error) {
-            throw new Error('Ocurrio un error')
+        let resultado = await sequelize.query(`SELECT * FROM Usuario WHERE email_usr = ?`, { replacements: usuarioUpdate, type: sequelize.QueryTypes.SELECT })
+        if (resultado[0] === undefined) {
+            return false
+        } else {
+            return true
         }
     }
 
@@ -28,17 +22,30 @@ module.exports = class Datos {
             data.email,
             data.pass
         ]
-
-        try {
-            let resultado = await sequelize.query(`SELECT * FROM Usuario WHERE email_usr = ? AND contrasena = ?`, { replacements: usuarioUpdate, type: sequelize.QueryTypes.SELECT })
-            if (resultado[0] === undefined) {
-                return false
-            } else {
-                return resultado[0]
-            }
-        } catch (error) {
-            throw new Error('Ocurrio un error')
+        let resultado = await sequelize.query(`SELECT * FROM Usuario WHERE email_usr = ? AND contrasena = ?`, { replacements: usuarioUpdate, type: sequelize.QueryTypes.SELECT })
+        if (resultado[0] === undefined) {
+            return false
+        } else {
+            return resultado[0]
         }
+
+    }
+
+
+    static async autenticarPass(usr) {
+        //chequear con la base de datos que exista el usuario y pass
+        let usuarioUpdate = [
+            usr.email,
+            usr.pass
+        ]
+
+        let resultado = await sequelize.query(`SELECT * FROM Usuario WHERE email_usr = ? AND contrasena = ?`, { replacements: usuarioUpdate, type: sequelize.QueryTypes.SELECT })
+        if (resultado[0] === undefined) {
+            return false
+        } else {
+            return true
+        }
+
     }
 
 }

@@ -4,8 +4,8 @@ const Joi = require('joi')
 //Exportamos nuestro schema
 
 module.exports = {
-    //uso de objetos
-    Login: Joi.object().keys({
+    //validacion de registro de usuario
+    Registro: Joi.object().keys({
         nombre: Joi.string().min(3).max(30).required(),
         apellido: Joi.string().min(3).max(40).required(),
         email: Joi.string().email().required(),
@@ -17,11 +17,13 @@ module.exports = {
         perfillinkedin: Joi.string().empty(''),
         hobbies: Joi.string().empty(''),
     }).with('username_usuario', 'pass_usuario'),
-    //Uso de objetos
-    Producto: Joi.object().keys({
-        descricion_prod: Joi.string().min(5).max(50).required(),
-        precio_prod: Joi.number().required(),
-        imagen_prod: Joi.string(),
-        cantidad_inventario_prod: Joi.number(),
+
+    //validacion de registro de tecnologias
+    Perfil: Joi.object().keys({
+        id: Joi.number().integer().min(1).max(6).required(),
+        nombre: Joi.string().required(),
+        beforetecla: Joi.number().integer().min(1).max(10).required(),
+        aftertecla: Joi.number().integer().min(1).max(10).required(),
+        puntaje: Joi.number().integer().min(1).max(5)
     }),
 }

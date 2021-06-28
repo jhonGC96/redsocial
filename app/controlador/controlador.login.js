@@ -18,17 +18,15 @@ module.exports.verificacion = async(req, res, next) => {
 
 module.exports.chequearUsuario = async(usr) => {
     let usrchk = usr
-    try {
-        let resultado = await login.existenciaDeUsuario(usrchk)
-        if (resultado) {
-            return resultado
-        } else {
-            throw new Error('No existe el usuario')
-        }
-    } catch (err) {
-        console.log(err)
-        throw new Error('no semuy bien que paso')
+    let resultado = await login.existenciaDeUsuario(usrchk)
+    if (resultado) {
+        let res = await login.autenticarPass(usrchk)
+        return res;
+    } else {
+        throw new Error('El correo que ingreso es incorrecto o no esta registrado')
+
     }
+
 }
 
 
@@ -48,15 +46,11 @@ module.exports.generaToken = async(data) => {
 
 module.exports.datosUsuario = async(usr) => {
     let usrchk = usr
-    try {
-        let resultado = await login.recuperarInfoUser(usrchk)
-        if (resultado) {
-            return resultado
-        } else {
-            throw new Error('No hay datos de Usuario')
-        }
-    } catch (err) {
-        console.log(err)
-        throw new Error(' no semuy bien que paso')
+    let resultado = await login.recuperarInfoUser(usrchk)
+    if (resultado) {
+        return resultado
+    } else {
+        throw new Error('Contrasena incorrecta')
     }
+
 }

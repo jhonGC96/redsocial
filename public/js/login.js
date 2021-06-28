@@ -26,10 +26,10 @@ class Usuarios {
         return resultado
     }
 }
-
 //Manda el post
 form.addEventListener('submit', async(event) => {
     event.preventDefault();
+
     Usuarios.guardaUsuario(new Usuarios(email.value, pass.value));
     let resultado = await fetch("http://localhost:3000/login", {
         method: 'POST',
@@ -77,7 +77,10 @@ form.addEventListener('submit', async(event) => {
             })
             let res = await resultado.json();
             if (res === 'ok') {
-                location.href = '/userown/' + data.id
+                swal("Bienvenido!", "Haga click para continuar!", "success")
+                    .then((value) => {
+                        location.href = '/userown/' + data.id
+                    })
             } else {
                 console.log('no se pudo acceder');
             }

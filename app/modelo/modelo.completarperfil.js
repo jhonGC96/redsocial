@@ -10,17 +10,15 @@ module.exports = class Datos {
     }
 
     //funcion para dar de alta foto
-    static async alta(data) {
+    static async altaImagen(data) {
         //creación de objeto
-        let usuarioNuevo = [
-                data.imgbit,
-                data.descripcion,
-                data.id_user,
-            ]
-            //Control de erorres
+        let fotoNueva = [
+            data.filename,
+            data.descripcion,
+            data.id_user.id,
+        ]
         try {
-            //Uso de objetos
-            let resultado = await sequelize.query(`INSERT INTO Foto_perfil (imgbit, descipcion_foto, id_debeloper8) VALUES (?,?,?)`, { replacements: usuarioNuevo, type: sequelize.QueryTypes.SELECT })
+            let resultado = await sequelize.query(`INSERT INTO Foto_perfil (filename1, descripcion_foto, id_usr7) VALUES (?,?,?)`, { replacements: fotoNueva, type: sequelize.QueryTypes.SELECT })
             return resultado
         } catch (e) {
             console.log(e);

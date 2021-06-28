@@ -25,11 +25,6 @@ CONSTRAINT FKtipousr FOREIGN KEY (id_tipousr1) REFERENCES dbo.Tipousr (id_tipous
 )
 
 
-CREATE TABLE dbo.Foto_perfil (id_foto int primary key not null identity (1, 1), descripcion_foto NVARCHAR (50) NOT NULL, id_usr1 int NOT NULL
-CONSTRAINT FKfotoperfil FOREIGN KEY (id_usr1) REFERENCES dbo.Usuario (id)
-)
-
-
 CREATE TABLE dbo.Tecnologia (id_tecnologia int primary key not null identity (1, 1), nombre_tecn NVARCHAR (30))
 
 INSERT INTO dbo.Tecnologia (nombre_tecn) VALUES ('Node js')
@@ -98,4 +93,8 @@ CREATE TABLE dbo.Usuario_entorno (id_usr6 int not null, id_entorno1 int not null
 beforeentorno INT check (beforeentorno >0 and beforeentorno <=10), afterentorno INT check (afterentorno >0 and afterentorno <=10), puntaje_entorno int,  
 CONSTRAINT FKentorno1 FOREIGN KEY (id_usr6) REFERENCES dbo.Usuario (id),
 CONSTRAINT FKusuario6 FOREIGN KEY (id_entorno1) REFERENCES dbo.Entorno_profesional (id_entorno)
+)
+
+CREATE TABLE dbo.Foto_perfil (id_foto int NOT NULL primary key identity(1, 1), filename1 varchar (200) not null, descripcion_foto varchar (200), id_usr7 int not null
+CONSTRAINT FKfotoperfil1 FOREIGN KEY (id_usr7) REFERENCES dbo.Usuario (id),
 )

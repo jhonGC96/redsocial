@@ -1,5 +1,5 @@
 # redsocial
-Creacion de red social para Tecla usando node Js, SQL Server, Javascript, Jquery, Bootstrap
+Creacion de red social para Tecla usando node Js, SQL Server, Javascript, Bootstrap, express
 
 Para correr este proyecto sigue los siguientes pasos.
 

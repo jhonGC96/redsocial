@@ -49,7 +49,7 @@ formRegistrar.addEventListener('submit', async(event) => {
             icon: "error",
         });
     } else {
-        Usuarios.guardaUsuario(new Usuarios(email.value, pass.value));
+        Usuarios.guardaUsuario(new Usuarios(correo.value, password.value));
         let resultado = await fetch("http://localhost:3000/login", {
             method: 'POST',
             headers: {
@@ -57,8 +57,8 @@ formRegistrar.addEventListener('submit', async(event) => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                "email": email.value,
-                "pass": pass.value
+                "email": correo.value,
+                "pass": password.value
             })
         })
         let vuelta = await resultado.json();
@@ -71,7 +71,7 @@ formRegistrar.addEventListener('submit', async(event) => {
 
             ////Aqui se logea al usuario una vez que se registro
         } else {
-            Usuarios.guardaUsuario(new Usuarios(email.value, pass.value));
+            Usuarios.guardaUsuario(new Usuarios(correo.value, password.value));
             let resultado = await fetch("http://localhost:3000/login", {
                 method: 'POST',
                 headers: {
@@ -79,8 +79,8 @@ formRegistrar.addEventListener('submit', async(event) => {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    "email": email.value,
-                    "pass": pass.value
+                    "email": correo.value,
+                    "pass": password.value
                 })
             })
             let vuelta = await resultado.json();
@@ -118,7 +118,10 @@ formRegistrar.addEventListener('submit', async(event) => {
                     })
                     let res = await resultado.json();
                     if (res === 'ok') {
-                        location.href = '/userown/' + data.id + '/conocimientos'
+                        swal("Bienvenido!", "Haga click para continuar!", "success")
+                            .then((value) => {
+                                location.href = '/userown/' + data.id + '/conocimientos'
+                            })
                     } else {
                         console.log('no se pudo acceder');
                     }

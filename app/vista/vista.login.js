@@ -1,7 +1,5 @@
 const controladorLogin = require('../controlador/controlador.login')
-const controladorUsuario = require('../controlador/controlador.usuarios')
-
-//Exportar nuestros endpoint
+    //Exportar nuestros endpoint
 
 module.exports = async(app) => {
 
@@ -20,7 +18,6 @@ module.exports = async(app) => {
 
     app.post('/login', async(req, res) => {
         let usuario = req.body
-            //console.log(usuario);
         try {
             let resultado = await controladorLogin.chequearUsuario(usuario)
             if (resultado) {
@@ -28,11 +25,12 @@ module.exports = async(app) => {
                 let tokenResult = await controladorLogin.generaToken(usuario)
                 res.json({ token: tokenResult, username_usuario: usuarioInfo })
             } else {
-                throw new Error('usuario o contrasena incorrecta')
+                throw new Error('Contrase;a incorrecta')
             }
         } catch (err) {
             res.status(400).json({ error: err.message })
         }
+
     })
 
 }

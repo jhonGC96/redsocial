@@ -44,7 +44,7 @@ table.addEventListener('submit', async(event) => {
     } else {
 
         altauser.forEach(async(tecnologia) => {
-            let resultado = await fetch("http://localhost:3000/userown/" + usuario.id + "/habilidad", {
+            let resultado = await fetch("http://localhost:3000/userown/" + usuario.id + "/habilidades", {
                 method: 'POST',
                 headers: {
                     "Accept": "application/json, text/plain, *,*",
@@ -56,7 +56,7 @@ table.addEventListener('submit', async(event) => {
             let res = await resultado.json();
         })
 
-        swal("Bien hecho!", "Da click para continuar!", "success")
+        swal("Nice!", "Da click para continuar!", "success")
             .then((valor) => {
                 location.href = '/userown/' + usuario.id + '/entorno'
             });

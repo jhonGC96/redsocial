@@ -127,7 +127,7 @@ module.exports = async(app) => {
 
     //rutas para habilidades blandas
 
-    app.get('/userown/:id/habilidad', async(req, res) => {
+    app.get('/userown/:id/habilidades', async(req, res) => {
         try {
             let resultado = await miperfil.obtenerTablas()
             res.render("habilidadesblandas", {
@@ -140,7 +140,7 @@ module.exports = async(app) => {
         }
     })
 
-    app.post('/userown/:id/habilidad', controladorLogin.verificacion, async(req, res) => {
+    app.post('/userown/:id/habilidades', controladorLogin.verificacion, async(req, res) => {
         let usr = req.params
         let data = req.body
         try {

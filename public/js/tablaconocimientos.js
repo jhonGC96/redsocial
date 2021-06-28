@@ -65,7 +65,10 @@ table.addEventListener('submit', async(event) => {
                 body: JSON.stringify(tecnologia)
             })
         })
-        location.href = '/userown/' + usuario.id
+        swal("Correcto!", "Haga click para continuar!", "success")
+            .then((value) => {
+                location.href = '/userown/' + usuario.id + '/tecnologias'
+            })
     }
 
 })

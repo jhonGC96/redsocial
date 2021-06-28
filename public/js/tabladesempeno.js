@@ -56,8 +56,10 @@ table.addEventListener('submit', async(event) => {
             return res
         })
 
-        swal("Bien hecho!", "Da click para continuar!", "success");
-        location.href = '/userown/' + usuario.id
+        swal("Correcto!", "Haga click para continuar!", "success")
+            .then((value) => {
+                location.href = '/userown/' + usuario.id + '/habilidades'
+            })
     }
 
 })

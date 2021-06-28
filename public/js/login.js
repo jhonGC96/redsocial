@@ -77,7 +77,10 @@ form.addEventListener('submit', async(event) => {
             })
             let res = await resultado.json();
             if (res === 'ok') {
-                location.href = '/userown/' + data.id
+                swal("Bienvenido!", "Haga click para continuar!", "success")
+                    .then((value) => {
+                        location.href = '/userown/' + data.id
+                    })
             } else {
                 console.log('no se pudo acceder');
             }

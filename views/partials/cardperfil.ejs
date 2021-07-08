@@ -1,21 +1,33 @@
 <div class="card bg-dark text-white">
-    <img src="/images/usuario.jpg" class="card-img-top" alt="...">
+    <a href="/userown/<%= data.id%>/uploadfoto"><img src="/images/perfil/usuario.jpg" id="imagen" class="card-img-top" alt="..."></a>
     <div class="card-body">
         <h5 class="card-title">
             <%= data.nombre_usr%>
                 <%= data.apellido_usr%>
         </h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <p class="card-text">
+            <p>
+                <%= data.edad_usr%> años.
+            </p>
+            <p>
+                <%= data.hobbies%>
+
+            </p>
+        </p>
     </div>
     <ul class="list-group list-group-flush">
-        <li class="list-group-item list-group-item-dark">An item</li>
-        <li class="list-group-item list-group-item-dark">A second item</li>
-        <li class="list-group-item list-group-item-dark">A third item</li>
+        <li class="list-group-item list-group-item-dark">Amigos</li>
+        <li class="list-group-item list-group-item-dark">Estudios y certificaciones</li>
+        <li class="list-group-item list-group-item-dark">Idiomas</li>
     </ul>
     <div class="card-body">
-        <a href="#" class="card-link">
-            <%= data.perfillinkedin%>
+        <p><b>Datos de contacto</b></p>
+        <a href="<%= data.perfillinkedin%>" class="card-link text-white">
+            Linkedin: <%= data.perfillinkedin%>
         </a>
-        <a href="#" class="card-link">Another link</a>
+        <p>
+            <a href="#" class="card-link text-white">Email: <%= data.email_usr%></a>
+
+        </p>
     </div>
 </div>

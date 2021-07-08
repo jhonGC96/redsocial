@@ -5,12 +5,18 @@ const sequelize = require('./db/db.conexion')
 const vistaUsuarios = require('./app/vista/vista.usuarios')
 const vistaLogin = require('./app/vista/vista.login')
 const vistaCompletarperfil = require('./app/vista/vista.completarperfil')
-    //middlewares
+const multer = require('multer');
+const path = require('path')
+
+//middlewares
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+app.use(express.static(__dirname + '/public/'))
+app.use(multer({ dest: path.join(__dirname, '/public/images/temp') }).single('image'));
+
+
 
 //settings
-app.use(express.static(__dirname + '/public/'))
 app.set('view engine', 'ejs')
 app.set('views', __dirname + '/views')
 

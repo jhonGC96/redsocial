@@ -1,5 +1,4 @@
 const controladorLogin = require('../controlador/controlador.login')
-const validacion = require('../modelo/modelo.validacion')
 const miperfil = require('../controlador/controlador.completarperfil')
 const validar = require('../controlador/controlador.validacion')
 
@@ -10,33 +9,49 @@ module.exports = async(app) => {
 
     //Rutas para foto//
 
-    //alta foto
-    app.get('/userown/:id/upload-foto', async(req, res) => {
+    //obtener foto de perfil de usuario
+
+    app.get('/userown/:id/getFoto', async(req, res) => {
+        let idusr = req.params
         try {
-            res.render("subirfoto")
+            let result = await miperfil.getFoto(idusr)
+            if (result === undefined) {
+                res.json('empty')
+            } else {
+                res.json(result)
+            }
+        } catch (error) {
+            res.estatus(400).json(error)
+        }
+    })
+
+    //alta foto
+    app.get('/userown/:id/uploadfoto', async(req, res) => {
+        let data = req.params
+        try {
+            res.render("subirfoto", {
+                data
+            })
         } catch (error) {
             console.log(err)
             res.estatus(400).json('No se pudo abrir la pagina')
         }
     })
 
-    app.post('/userown/:id/upload-foto', controladorLogin.verificacion, async(req, res) => {
-        let data = req.body
-        try {
-            await controladorUsuario.altaUsuarios(data)
-            res.redirect('/userown/:id/tecnologias')
-        } catch (error) {
-
-        }
-
+    app.post('/userown/:id/uploadfoto', miperfil.upload, (req, res) => {
+        //res.json('ok');
+        res.redirect('/userown/' + req.params.id)
     })
 
 
     //guardar datos de tecnologias
 
     app.get('/userown/:id/tecnologias', async(req, res) => {
+        let id = req.params
         try {
-            res.render("tecnologias")
+            res.render("tecnologias", {
+                data: id
+            })
         } catch (error) {
             console.log(err)
             res.estatus(400).json('No se pudo abrir la pagina')
@@ -51,7 +66,7 @@ module.exports = async(app) => {
             await miperfil.altaTecnoUser(data, usr)
             res.json('ok')
         } catch (error) {
-            console.log('oh no, algo salio mal!');
+            console.log(error);
         }
 
     })
@@ -80,7 +95,7 @@ module.exports = async(app) => {
             await miperfil.altaConocimientoUser(data, usr)
             res.json('ok')
         } catch (error) {
-            console.log('oh no, algo salio mal!');
+            console.log(error);
         }
 
     })
@@ -90,10 +105,9 @@ module.exports = async(app) => {
     app.get('/obtenerTablas', async(req, res) => {
         try {
             let tablas = await miperfil.obtenerTablas()
-            console.log(tablas);
             res.json(tablas)
         } catch (error) {
-            console.log('oh no, algo salio mal!');
+            console.log(error);
         }
     })
 
@@ -109,7 +123,7 @@ module.exports = async(app) => {
 
         } catch (error) {
             console.log(err)
-            res.estatus(400).json('No se pudo abrir la pagina')
+            res.estatus(400).json(err)
         }
     })
 
@@ -177,5 +191,24 @@ module.exports = async(app) => {
         }
     })
 
+    //rutas para el buscador y mostrar los amigos
+    app.get('/getUsers', controladorLogin.verificacion, async(req, res) => {
+        try {
+            let resultado = await miperfil.buscarUser()
+            res.json(resultado);
+        } catch (error) {
+            console.log('oh no, algo salio mal!');
+        }
+    })
 
+    app.get('/userown/:id/search', async(req, res) => {
+        let data = req.params
+        try {
+            res.render('buscador', {
+                data
+            })
+        } catch (error) {
+            console.log('oh no, algo salio mal!');
+        }
+    })
 }

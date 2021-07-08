@@ -60,7 +60,6 @@ module.exports = class Datos {
         try {
             //Uso de objetos
             let resultado = await sequelize.query(`DELETE FROM usuarios WHERE id_usuario = ? `, { replacements: usuarioBaja, type: sequelize.QueryTypes.SELECT })
-
             return resultado
         } catch (e) {
             console.log(e);
@@ -68,39 +67,30 @@ module.exports = class Datos {
         }
     }
 
-
-
-
-    static async modificar(data) {
-
-        let usuarioUpdate = [
-                data
-            ]
-            //Control de errores
+    static async consultartablas(user) {
+        let usuarioNuevo = [
+            user
+        ]
         try {
-            //Uso de objetos
-            let resultado = await sequelize.query(`SELECT * FROM usuarios WHERE id_usuario = ? `, { replacements: usuarioUpdate, type: sequelize.QueryTypes.SELECT })
-            return resultado;
+
+            let tecnologias = await sequelize.query(`SELECT *from developer_tecno WHERE id_usr2 = ?`, { replacements: usuarioNuevo, type: sequelize.QueryTypes.SELECT })
+            let conocimientos = await sequelize.query(`SELECT *from Usuario_conocimiento WHERE id_usr3 = ?`, { replacements: usuarioNuevo, type: sequelize.QueryTypes.SELECT })
+            let desempeno = await sequelize.query(`SELECT *from Usuario_desempeno WHERE id_usr4 = ?`, { replacements: usuarioNuevo, type: sequelize.QueryTypes.SELECT })
+            let habilidad = await sequelize.query(`SELECT *from Usuario_habilidad WHERE id_usr5 = ?`, { replacements: usuarioNuevo, type: sequelize.QueryTypes.SELECT })
+            let entorno = await sequelize.query(`SELECT *from Usuario_entorno WHERE id_usr6 = ?`, { replacements: usuarioNuevo, type: sequelize.QueryTypes.SELECT })
+            let tablas = {
+                'tecno': tecnologias,
+                'cono': conocimientos,
+                'desempeno': desempeno,
+                'habil': habilidad,
+                'entor': entorno
+            }
+            return tablas;
         } catch (error) {
-            throw new Error('Ocurrio un error')
+
         }
     }
 
-
-    // static async modificarSave(data, id) {
-    //     let usuarioUpdate = [
-    //         data.nombres_usuario,
-    //         data.apellidos_usuario,
-    //         data.email_usuario,
-    //         data.username_usuario,
-    //         data.id_tipousr,
-    //         id
-    //     ]
-    //     try {
-    //         let resultado = await sequelize.query(`UPDATE usuarios SET nombres_usuario= ?, apellidos_usuario= ?, email_usuario= ?, username_usuario= ?, id_tipousr= ? WHERE id_usuario= ? `, { replacements: usuarioUpdate, type: sequelize.QueryTypes.SELECT })
-    //         return resultado;
-    //     } catch (error) {}
-    // }
 
     static async existenciaDeUsuario(data) {
         let usuarioUpdate = [

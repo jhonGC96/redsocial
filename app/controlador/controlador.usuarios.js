@@ -14,6 +14,18 @@ module.exports.listarUsuarios = async(usr) => {
     }
 }
 
+module.exports.obtenerTablas = async(usr) => {
+    //Control de errores
+    try {
+        //Uso de objetos
+        let tabla = await usuarios.consultartablas(usr)
+        return tabla;
+    } catch (e) {
+        console.log(e);
+        throw new Error('Error al agregar')
+    }
+}
+
 //Función para alta de usuarios
 module.exports.altaUsuarios = async(data) => {
     //Control de errores

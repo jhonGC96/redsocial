@@ -26,6 +26,19 @@ module.exports = class Datos {
         }
     }
 
+    //obtener la foto
+    static async obtenerFoto(user) {
+        let usuario = [
+            user.id
+        ]
+        try {
+            let resultado = await sequelize.query(`select *from Foto_perfil WHERE id_usr7 = ? ORDER BY id_foto DESC
+            `, { replacements: usuario, type: sequelize.QueryTypes.SELECT })
+            return resultado[0];
+        } catch (error) {
+            throw new Error('Error en la peticion a la bd')
+        }
+    }
 
 
     //funcion para dar de alta tecnologias del usuario
@@ -55,7 +68,7 @@ module.exports = class Datos {
             let resultado = await sequelize.query(`SELECT *FROM Conocimiento`)
             return resultado[0];
         } catch (error) {
-
+            console.log(error);
         }
     }
 
@@ -158,6 +171,16 @@ module.exports = class Datos {
         } catch (e) {
             console.log(e);
             throw new Error('Ocurrio un error al realizar la alta')
+        }
+    }
+
+    static async buscarUsuario() {
+        try {
+            let resultado = await sequelize.query(`select *from Usuario`)
+            console.log(resultado[0]);
+            return resultado[0];
+        } catch (error) {
+            throw new Error('Error en la peticion a la bd')
         }
     }
 

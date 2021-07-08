@@ -27,19 +27,9 @@ helper.altaImagen = async(data) => {
         } else {
             throw new Error('error al dar de alta la foto en la BD')
         }
-
     } catch (error) {
         console.log(error);
     }
-    //Control de errores
-    // try {
-    //     //Uso de objetos
-    //     await miperfil.alta(data)
-    //     return 'Alta correcta'
-    // } catch (e) {
-    //     console.log(e);
-    //     throw new Error('Error al agregar')
-    // }
 }
 
 module.exports = helper;
@@ -52,7 +42,7 @@ module.exports.upload = async(req, res, next) => {
         const imagePath = req.file.path;
         const extension = path.extname(req.file.originalname).toLowerCase();
         const rutasave = path.resolve(`public/images/perfil/${name}${extension}`);
-        const filename = imagePath + extension;
+        const filename = name + extension;
         if (extension === '.png' || extension === '.jpg' || extension === '.jpeg' || extension === '.gif') {
             await fs.move(imagePath, rutasave);
             const foto = new Image(filename, datos.descripcion, idusr);
@@ -72,7 +62,13 @@ module.exports.upload = async(req, res, next) => {
     }
 }
 
+//funcion para obtener la foto de la bd
 
+module.exports.getFoto = async(dato) => {
+    let resultado = await miperfil.obtenerFoto(dato)
+        //console.log(resultado);
+    return resultado
+}
 
 //funciones para dar de alta las tecnologias del usuario
 
@@ -168,6 +164,18 @@ module.exports.altaEntornoUser = async(data, usr) => {
         //Uso de objetos
         await miperfil.altaEntornoUser(data, usr)
         return 'succes'
+    } catch (e) {
+        console.log(e);
+        throw new Error('Error al agregar')
+    }
+}
+
+module.exports.buscarUser = async() => {
+    //Control de errores
+    try {
+        //Uso de objetos
+        let resultado = await miperfil.buscarUsuario()
+        return resultado
     } catch (e) {
         console.log(e);
         throw new Error('Error al agregar')

@@ -1,3 +1,4 @@
+let fotoinvitado = document.getElementById('fotoinvitado')
 let id = idusuario
 class ImagenInvitado {
     static async recuperaUsuario() {
@@ -23,4 +24,10 @@ async function pintarFoto() {
         foto.src = `/images/perfil/${img.filename1}`
     }
 }
+
+function nosubirfoto() {
+    fotoinvitado.href = ""
+}
+
+nosubirfoto()
 pintarFoto()

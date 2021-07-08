@@ -57,7 +57,6 @@ const filtrar = async() => {
             h5.setAttribute('class', 'card-title');
             h5.textContent = persona.nombre_usr + ' ' + persona.apellido_usr;
             const a = document.createElement('a')
-            a.setAttribute('href', `/uservisit/${persona.id}/`)
             a.appendChild(h5)
             const botones = document.createElement('div');
             botones.setAttribute('class', 'card-body');
@@ -69,9 +68,10 @@ const filtrar = async() => {
             botonaceptar.appendChild(icon)
             botones.appendChild(a)
             let myusr = await JSON.parse(localStorage.getItem('dataUsuario'))
-            console.log(myusr);
+            a.setAttribute('href', `/userown/${persona.id}/`)
             if (persona.id !== myusr.id) {
                 botones.appendChild(botonaceptar)
+                a.setAttribute('href', `/uservisit/${persona.id}/`)
             }
             titulo.appendChild(img)
             titulo.appendChild(botones)
